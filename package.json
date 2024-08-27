@@ -1,0 +1,24 @@
+{
+	"name": "@hushaha/cli-monorepo",
+	"private": true,
+	"type": "module",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"dev": "pnpm run --parallel dev -F create-hush-cli"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"engines": {
+		"node": ">=16",
+		"pnpm": ">=7"
+	},
+	"devDependencies": {
+		"typescript": "^5.5.4"
+	},
+	"dependencies": {
+		"@types/node": "^22.5.0"
+	}
+}

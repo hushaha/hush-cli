@@ -1,0 +1,5 @@
+packages:
+  - playground
+  - 'playground/*'
+  - create-hush-cli
+  - 'create-hush-cli/templates/*'

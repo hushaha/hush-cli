@@ -1,0 +1,42 @@
+{
+	"name": "create-hush-cli",
+	"version": "1.0.0",
+	"type": "module",
+	"license": "MIT",
+	"author": "Hush",
+	"bin": {
+		"create-hush-cli": "index.js",
+		"chc": "index.js"
+	},
+	"files": [
+		"index.js",
+		"templates",
+		"dist"
+	],
+	"scripts": {
+		"dev": "unbuild --stub",
+		"build": "unbuild",
+		"typecheck": "tsc --noEmit"
+	},
+	"engines": {
+		"node": "^18.0.0 || >=20.0.0"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/hushaha/hush-cli",
+		"directory": "packages/create-vite"
+	},
+	"bugs": {
+		"url": "https://github.com/hushaha/hush-cli/issues"
+	},
+	"devDependencies": {
+		"kolorist": "^1.8.0",
+		"minimist": "^1.2.8",
+		"prompts": "^2.4.2",
+		"unbuild": "^2.0.0"
+	},
+	"dependencies": {
+		"@types/minimist": "^1.2.5",
+		"@types/prompts": "^2.4.9"
+	}
+}
