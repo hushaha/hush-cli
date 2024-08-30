@@ -55,7 +55,7 @@
 		"*.{js,ts,tsx,jsx}": [
 			"eslint"
 		],
-		"*.{html,css,less,scss,md}": [
+		"*.{html,css,less,scss,md,js,tsx,ts,jsx}": [
 			"prettier --write"
 		]
 	}
