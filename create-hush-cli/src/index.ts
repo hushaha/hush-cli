@@ -47,11 +47,6 @@ const FRAMEWORKS: Framework[] = [
 				display: "Antd",
 				color: blue,
 			},
-			{
-				name: "tailwindcss",
-				display: "TailwindCSS",
-				color: yellow,
-			},
 		],
 	},
 	{
@@ -81,11 +76,6 @@ const FRAMEWORKS: Framework[] = [
 				display: "Antd",
 				color: yellow,
 			},
-			{
-				name: "tailwindcss",
-				display: "TailwindCSS",
-				color: magenta,
-			},
 		],
 	},
 	{
@@ -97,11 +87,6 @@ const FRAMEWORKS: Framework[] = [
 				name: "antd",
 				display: "Antd",
 				color: blue,
-			},
-			{
-				name: "tailwindcss",
-				display: "TailwindCSS",
-				color: yellow,
 			},
 		],
 	},

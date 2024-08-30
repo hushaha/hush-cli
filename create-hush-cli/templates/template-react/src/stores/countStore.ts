@@ -1,4 +1,5 @@
-import { makeObservable, observable, action } from 'mobx';
+import { action, makeObservable, observable } from 'mobx';
+
 class CounterStore {
 	constructor() {
 		makeObservable(this, {

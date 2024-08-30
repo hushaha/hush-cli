@@ -1,5 +1,4 @@
 import { observer } from 'mobx-react';
-import { useNavigate } from 'react-router-dom';
 
 import { HelloWorld } from '@/components';
 import { countStore } from '@/stores';

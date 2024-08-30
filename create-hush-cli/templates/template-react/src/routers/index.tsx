@@ -1,4 +1,3 @@
-import { lazy } from 'react';
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
 
 const Home = lazy(() => import('@/pages/Home/index.tsx'));
