@@ -1,3 +1,3 @@
-import HelloWorld from './HelloWorld/index.tsx';
+import HelloWorld from './HelloWorld';
 
 export { HelloWorld };

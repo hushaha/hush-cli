@@ -1,8 +1,8 @@
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
 
-const Home = lazy(() => import('@/pages/Home/index.tsx'));
-const About = lazy(() => import('@/pages/About/index.tsx'));
-const NotFound = lazy(() => import('@/features/NotFound/index.tsx'));
+const Home = lazy(() => import('@/pages/Home'));
+const About = lazy(() => import('@/pages/About'));
+const NotFound = lazy(() => import('@/features/NotFound'));
 
 const routers = [
 	{

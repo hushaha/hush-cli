@@ -1,5 +1,5 @@
-import ErrorFallback from './ErrorFallback/index.tsx';
-import Loading from './Loading/index.tsx';
-import NotFound from './NotFound/index.tsx';
+import ErrorFallback from './ErrorFallback';
+import Loading from './Loading';
+import NotFound from './NotFound';
 
 export { ErrorFallback, Loading, NotFound };

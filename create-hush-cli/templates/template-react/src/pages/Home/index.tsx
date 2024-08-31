@@ -22,50 +22,46 @@ const Home = () => {
 	};
 
 	return (
-		<div className="flex h-full w-full flex-col gap-8 divide-y divide-dashed p-8 text-center">
-			<div>
-				<h1 className="text-3xl">use Router</h1>
-				<div className="mx-auto mt-4 flex w-32 flex-col">
-					<HelloWorld />
-					<button
-						onClick={onClick}
-						className="mt-2 rounded-md border px-5 py-2 text-base font-medium hover:shadow-md"
-					>
-						to about
-					</button>
-				</div>
+		<div className="h-full w-full p-8">
+			<div className="mt-8 border-b pb-8">
+				<h1 className="mb-2 pb-2 text-3xl">use components</h1>
+				<HelloWorld />
 			</div>
 
-			<div>
-				<h1 className="text-3xl">use Icon</h1>
-				<div className="mt-4">
-					<button className="icon-[ep--menu]" style={{ width: '1.5rem', height: '1.5rem' }} />
-				</div>
+			<div className="mt-8 border-b pb-8">
+				<h1 className="mb-2 pb-2 text-3xl">use Router</h1>
+				<button
+					className="mt-2 rounded-md border px-5 py-2 text-base font-medium hover:shadow-md"
+					onClick={onClick}
+				>
+					to about
+				</button>
 			</div>
 
-			<div>
-				<h1 className="text-3xl">use store</h1>
-				<div className="mt-4">
-					count: {countStore.count}
-					<button
-						onClick={onAdd}
-						className="ml-2 rounded-md border px-5 py-2 text-base font-medium hover:shadow-md"
-					>
-						count ++
-					</button>
-				</div>
+			<div className="mt-8 border-b pb-8">
+				<h1 className="mb-2 pb-2 text-3xl">use Icon</h1>
+				<button className="icon-[ep--menu]" style={{ width: '1.5rem', height: '1.5rem' }} />
 			</div>
 
-			<div>
-				<h1 className="text-3xl">use request</h1>
-				<div className="mt-4">
-					<button
-						onClick={onRequest}
-						className="ml-2 rounded-md border px-5 py-2 text-base font-medium hover:shadow-md"
-					>
-						request
-					</button>
-				</div>
+			<div className="mt-8 border-b pb-8">
+				<h1 className="mb-2 pb-2 text-3xl">use store</h1>
+				count: {countStore.count}
+				<button
+					className="ml-2 rounded-md border px-5 py-2 text-base font-medium hover:shadow-md"
+					onClick={onAdd}
+				>
+					count ++
+				</button>
+			</div>
+
+			<div className="mt-8 border-b pb-8">
+				<h1 className="mb-2 pb-2 text-3xl">use request</h1>
+				<button
+					className="ml-2 rounded-md border px-5 py-2 text-base font-medium hover:shadow-md"
+					onClick={onRequest}
+				>
+					request
+				</button>
 			</div>
 		</div>
 	);

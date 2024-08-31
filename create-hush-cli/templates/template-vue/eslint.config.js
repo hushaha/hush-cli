@@ -13,7 +13,7 @@ export default tseslint.config(
 			...tseslint.configs.recommended,
 			...pluginVue.configs['flat/recommended']
 		],
-		files: ['*.vue', '**/*.{js,ts,vue}'],
+		files: ['*.{vue,ts}', '**/*.{js,ts,vue}'],
 		languageOptions: {
 			ecmaVersion: 2020,
 			globals: globals.browser,

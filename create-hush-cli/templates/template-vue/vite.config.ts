@@ -1,8 +1,8 @@
-import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { resolve } from 'path';
 import tailwindcss from 'tailwindcss';
 import AutoImport from 'unplugin-auto-import/vite';
+import { defineConfig } from 'vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({

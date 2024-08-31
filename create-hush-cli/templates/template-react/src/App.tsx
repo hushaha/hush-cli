@@ -3,7 +3,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 
 import { ErrorFallback, Loading } from '@/features';
 
-import Routes from './routers/index.tsx';
+import Routes from './routers';
 
 function App() {
 	return (

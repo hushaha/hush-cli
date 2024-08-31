@@ -14,7 +14,6 @@
 	},
 	"dependencies": {
 		"@hushaha/request": "^1.0.3",
-		"initialize-css": "^1.4.0",
 		"pinia": "^2.2.2",
 		"vue": "^3.4.37",
 		"vue-router": "^4.4.3"
