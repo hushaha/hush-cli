@@ -3,22 +3,14 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import minimist from 'minimist';
 import prompts from 'prompts';
-import { blue, cyan, green, magenta, red, reset, yellow } from 'kolorist';
+import { blue, cyan, green, magenta, red, reset } from 'kolorist';
 
 type ColorFunc = (str: string | number) => string;
-
-type CliType = {
-	name: string;
-	display: string;
-	color: ColorFunc;
-	customCommand?: string;
-};
 
 type Framework = {
 	name: string;
 	display: string;
 	color: ColorFunc;
-	cliTypes?: CliType[];
 };
 
 const DEFAULT_PROJECT_NAME = 'hush-project';
@@ -27,36 +19,12 @@ const FRAMEWORKS: Framework[] = [
 	{
 		name: 'react',
 		display: 'React-TS',
-		color: cyan,
-		cliTypes: [
-			{
-				name: 'multirepo',
-				display: 'MultiRepo',
-				color: blue
-			},
-			{
-				name: 'monorepo',
-				display: 'Monorepo',
-				color: yellow
-			}
-		]
+		color: cyan
 	},
 	{
 		name: 'vue',
 		display: 'Vue-TS',
-		color: blue,
-		cliTypes: [
-			{
-				name: 'multirepo',
-				display: 'MultiRepo',
-				color: blue
-			},
-			{
-				name: 'monorepo',
-				display: 'Monorepo',
-				color: yellow
-			}
-		]
+		color: blue
 	},
 	{
 		name: 'next',
@@ -65,20 +33,39 @@ const FRAMEWORKS: Framework[] = [
 	}
 ];
 
+const renameFiles: Record<string, string | undefined> = {
+	_gitignore: '.gitignore'
+};
+
 function formatTargetDir(targetDir: string | undefined) {
 	return targetDir?.trim().replace(/\/+$/g, '');
 }
 
-function isEmpty(path: string) {
+/**
+ * Check a directory is empty
+ * @param {string} path
+ * @returns {boolean}
+ */
+function isEmpty(path: string): boolean {
 	const files = fs.readdirSync(path);
 	return files.length === 0 || (files.length === 1 && files[0] === '.git');
 }
 
-function isValidPackageName(projectName: string) {
+/**
+ * Check a string is a valid package name
+ * @param {string} projectName
+ * @returns {boolean}
+ */
+function isValidPackageName(projectName: string): boolean {
 	return /^(?:@[a-z\d\-*~][a-z\d\-*._~]*\/)?[a-z\d\-~][a-z\d\-._~]*$/.test(projectName);
 }
 
-function emptyDir(dir: string) {
+/**
+ * Empty a directory
+ * @param {string} dir
+ * @returns {void}
+ */
+function emptyDir(dir: string): void {
 	if (!fs.existsSync(dir)) {
 		return;
 	}
@@ -90,7 +77,12 @@ function emptyDir(dir: string) {
 	}
 }
 
-function toValidPackageName(projectName: string) {
+/**
+ * Convert a string to a valid package name
+ * @param {string} projectName
+ * @returns {string}
+ */
+function toValidPackageName(projectName: string): string {
 	return projectName
 		.trim()
 		.toLowerCase()
@@ -99,26 +91,40 @@ function toValidPackageName(projectName: string) {
 		.replace(/[^a-z\d\-~]+/g, '-');
 }
 
-function pkgFromUserAgent(userAgent: string | undefined) {
-	if (!userAgent) return undefined;
+/**
+ * Get package.json from user agent
+ * @param {string} userAgent
+ * @returns {string} name
+ */
+function pkgFromUserAgent(userAgent: string | undefined): string {
+	if (!userAgent) return '';
 	const pkgSpec = userAgent.split(' ')[0];
 	const pkgSpecArr = pkgSpec.split('/');
-	return {
-		name: pkgSpecArr[0],
-		version: pkgSpecArr[1]
-	};
+	return pkgSpecArr[0];
 }
 
-function copyDir(srcDir: string, destDir: string) {
+/**
+ * Copy a directory
+ * @param {string} srcDir
+ * @param {string} destDir
+ * @returns {void}
+ */
+function copyDir(srcDir: string, destDir: string): void {
 	fs.mkdirSync(destDir, { recursive: true });
 	for (const file of fs.readdirSync(srcDir)) {
 		const srcFile = path.resolve(srcDir, file);
-		const destFile = path.resolve(destDir, file);
+		const destFile = path.resolve(destDir, renameFiles[file] || file);
 		copy(srcFile, destFile);
 	}
 }
 
-function copy(src: string, dest: string) {
+/**
+ * Copy a file or directory
+ * @param {string} src
+ * @param {string} dest
+ * @returns {void}
+ */
+function copy(src: string, dest: string): void {
 	const stat = fs.statSync(src);
 	if (stat.isDirectory()) {
 		copyDir(src, dest);
@@ -148,8 +154,8 @@ Options:
   -t, --template NAME        use a specific template
 
 Available templates:
-${green('vue-ts-monorepo      vue-ts      vue')}
-${cyan('react-ts-monorepo    react-ts    react')}
+${green('vue-ts')}
+${cyan('react-ts')}
 ${magenta('next-ts')}
 `;
 
@@ -161,9 +167,7 @@ const init = async () => {
 		return;
 	}
 
-	let result: prompts.Answers<
-		'projectName' | 'overwrite' | 'packageName' | 'framework' | 'cliType'
-	>;
+	let result: prompts.Answers<'projectName' | 'overwrite' | 'packageName' | 'framework'>;
 
 	// get user input target dir
 	const argTargetDir = formatTargetDir(argv._[0]);
@@ -229,19 +233,6 @@ const init = async () => {
 							value: framework
 						};
 					})
-				},
-				{
-					type: (framework: Framework) => (framework && framework.cliTypes ? 'select' : null),
-					name: 'cliType',
-					message: reset('Select a cliType:'),
-					choices: (framework: Framework) =>
-						framework.cliTypes!.map((type) => {
-							const typeColor = type.color;
-							return {
-								title: typeColor(type.display || type.name),
-								value: type.name
-							};
-						})
 				}
 			],
 			{
@@ -292,8 +283,8 @@ const init = async () => {
 		console.log(`  cd ${cdProjectName.includes(' ') ? `"${cdProjectName}"` : cdProjectName}`);
 	}
 
-	const pkgInfo = pkgFromUserAgent(process.env.npm_config_user_agent);
-	const pkgManager = pkgInfo ? pkgInfo.name : 'npm';
+	const pkgInfoName = pkgFromUserAgent(process.env.npm_config_user_agent);
+	const pkgManager = pkgInfoName || 'npm';
 
 	switch (pkgManager) {
 		case 'yarn':

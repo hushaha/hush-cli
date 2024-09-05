@@ -11,7 +11,8 @@
 	"files": [
 		"index.js",
 		"templates",
-		"dist"
+		"dist",
+		"../README.md"
 	],
 	"scripts": {
 		"dev": "unbuild --stub",
