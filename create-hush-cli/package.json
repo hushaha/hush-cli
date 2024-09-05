@@ -12,7 +12,7 @@
 		"index.js",
 		"templates",
 		"dist",
-		"../README.md"
+		"README.md"
 	],
 	"scripts": {
 		"dev": "unbuild --stub",
