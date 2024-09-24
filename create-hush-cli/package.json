@@ -12,7 +12,7 @@
 		"index.js",
 		"templates",
 		"dist",
-		"README.md"
+		"!**/node_modules"
 	],
 	"scripts": {
 		"dev": "unbuild --stub",
