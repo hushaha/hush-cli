@@ -30,6 +30,11 @@ const FRAMEWORKS: Framework[] = [
 		name: 'next',
 		display: 'Next',
 		color: magenta
+	},
+	{
+		name: 'vitepress',
+		display: 'VitePress',
+		color: green
 	}
 ];
 

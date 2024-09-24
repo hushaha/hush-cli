@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	/* 主色 */
+	--primary-color: #a855f7;
+	/* 辅助文字色 */
+	--text-color-secondary: #737373;
+	/* 边框色 */
+	--border-color: #e0e0e0;
+	/* scrollbar */
+	--scrollbar-color: #0003;
+
+	/* code块背景颜色 */
+	--vp-code-block-bg: #f8f8f8;
+}
+
+.dark {
+	--border-color: #626262;
+
+	--vp-c-bg: #1e1e1e;
+	--vp-c-text-1: #eee;
+	--vp-code-block-bg: #333;
+}
+
+:root {
+	--vp-c-brand-1: var(--primary-color);
+	--vp-c-brand-2: var(--primary-color);
+	--vp-c-brand-3: var(--primary-color);
+	--vp-sidebar-bg-color: var(--vp-c-bg);
+}
+
+@layer base {
+	html,
+	body {
+		::-webkit-scrollbar {
+			width: 8px;
+			height: 8px;
+		}
+
+		::-webkit-scrollbar-thumb {
+			background: var(--scrollbar-color);
+			border-radius: 10px;
+			transition: all 0.2s ease-in-out;
+		}
+
+		::-webkit-scrollbar-track {
+			border-radius: 10px;
+		}
+	}
+}
+
+/* ---------------颜色合集--------------- */
+@layer base {
+	.q-border {
+		border: 1px solid var(--border-color);
+	}
+
+	.q-border-b {
+		border-bottom: 1px solid var(--border-color);
+	}
+}
+
+@layer components {
+	.example {
+		@apply q-border rounded-md;
+
+		> .op-btn {
+			@apply cursor-pointer py-2 text-center text-sm;
+
+			color: var(--text-color-secondary);
+
+			*:hover {
+				color: var(--primary-color);
+			}
+		}
+
+		div[class*='language-'] {
+			@apply m-0 max-h-0 rounded-none;
+			transition: max-height 0.2s ease-in-out;
+		}
+
+		div[class*='language-'].show {
+			@apply max-h-80;
+		}
+	}
+}
